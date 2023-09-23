@@ -1,3 +1,3 @@
-import { TracesResponse } from "./types";
+import { TracesResponse } from './types';
 
 export const data: TracesResponse[] = [];

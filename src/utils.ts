@@ -1,4 +1,4 @@
-import { TracesResponse } from "./types";
+import { TracesResponse } from './types';
 
 export const calcDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
     const R = 6371e3; // metres
@@ -13,7 +13,7 @@ export const calcDistance = (lat1: number, lon1: number, lat2: number, lon2: num
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
     return R * c; // in metres
-}
+};
 
 export const findLongestDistanceAndMostTracedCountry = (data: TracesResponse[]): [number, string, number, string] => {
     return data.reduce<[number, string, number, string]>((result, item) => {
@@ -30,5 +30,5 @@ export const findLongestDistanceAndMostTracedCountry = (data: TracesResponse[]):
         }
 
         return result;
-    }, [-Infinity, "", 0, ""]);
-}
+    }, [-Infinity, '', 0, '']);
+};

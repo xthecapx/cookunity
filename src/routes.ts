@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { data } from './data';
 import { GeoResponse } from './types';
-import { calcDistance } from './utils';
+import { calcDistance, findLongestDistanceAndMostTracedCountry } from './utils';
 const router = express.Router();
 
 const API_KEY = `b05f9defd60b202d30248da868119156`;
@@ -55,11 +55,20 @@ router.post('/traces', async (req: Request, res: Response, next: NextFunction) =
   }
 });
 
-// Define the /statistics route
 router.get('/statistics', (req, res) => {
-  // Handle the GET request for /statistics
-  // Implement the logic to calculate statistics and respond with the data
-  res.status(200).send('Hello, World!');
+  const [longestDistance, longestDistanceCountry, mostTracedCount, mostTracedCountry] = findLongestDistanceAndMostTracedCountry(data)
+  const jsonResponse = {
+    "longest_distance": {
+      "country": longestDistanceCountry,
+      "value": longestDistance
+    },
+    "most_traced": {
+      "country": mostTracedCountry,
+      "value": mostTracedCount
+    }
+  }
+
+  res.status(200).json(jsonResponse);
 });
 
 export default router;

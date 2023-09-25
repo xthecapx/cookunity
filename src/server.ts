@@ -1,6 +1,8 @@
 import express from 'express';
 import routes from './routes';
 import dotenv from 'dotenv';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './docs/swagger.json';
 
 const app = express();
 app.use(express.json());
@@ -12,15 +14,11 @@ if (isNaN(port)) {
   process.exit(1);
 }
 
-console.log(process.env.NODE_ENV);
-
-// if (process.env.NODE_ENV !== 'production') {
 dotenv.config();
-// }
-
-console.log(process.env.DATA_FIXER_KEY, 'DATA_FIXER_KEY');
 
 app.use('/', routes);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

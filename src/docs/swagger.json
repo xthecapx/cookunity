@@ -1,0 +1,55 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Challenge API Documentation",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/traces": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Get traces from IP",
+            "schema": {
+              "required": [
+                "ip"
+              ],
+              "properties": {
+                "ip": {
+                  "type": "string",
+                  "example": "210.138.184.59"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/statistics": {
+      "get": {
+        "summary": "Get statistics of the traces",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}

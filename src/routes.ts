@@ -1,9 +1,11 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { getStatistics, postTraces } from './services';
+import { validation } from './middleware';
+import { schemas } from './schemas';
 
 const router = express.Router();
 
-router.post('/traces', async(req: Request, res: Response, next: NextFunction) => {
+router.post('/traces', validation(schemas.tracesPOST), async(req: Request, res: Response, next: NextFunction) => {
     /* #swagger.parameters['obj'] = { 
       in: 'body',
       description: 'Get traces from IP',

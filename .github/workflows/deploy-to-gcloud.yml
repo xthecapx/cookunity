@@ -33,11 +33,18 @@ jobs:
       - name: 'Use gcloud CLI'
         run: 'gcloud info'
 
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo DATA_FIXER_KEY=${{ vars.DATA_FIXER_KEY }} >> .env
+          cat .env
+
       - name: Deploy to Google App Engine
         run: |
           gcloud app deploy
         env:
           GCLOUD_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
+          DATA_FIXER_KEY: ${{ vars.DATA_FIXER_KEY }}
 
       - name: Deploy Complete
         run: echo "Deployment completed successfully!"
